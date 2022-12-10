@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "21214106754",
+    "project_id": "workshop-40402",
+    "storage_bucket": "workshop-40402.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21214106754:android:ba6348067108fd4ea2d09b",
+        "android_client_info": {
+          "package_name": "com.example.kiosk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21214106754-bja8neeouhn6gmkmcqjho349fa97t85f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3JogA-fK4NQ-YiFCFfWaiw2rVC19Bz3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21214106754-bja8neeouhn6gmkmcqjho349fa97t85f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21214106754-j3rsdqka4uddsb808be7fmr7jl0p01h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.redlinesoft.bookstore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21214106754:android:88729048e796dc30a2d09b",
+        "android_client_info": {
+          "package_name": "net.redlinesoft.bookstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21214106754-0qgv1ingofrpgvfvtepns5j4mp0112nv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.redlinesoft.bookstore",
+            "certificate_hash": "785759efdfb6af2e261895564e367fac2b69d05a"
+          }
+        },
+        {
+          "client_id": "21214106754-bja8neeouhn6gmkmcqjho349fa97t85f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3JogA-fK4NQ-YiFCFfWaiw2rVC19Bz3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21214106754-bja8neeouhn6gmkmcqjho349fa97t85f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21214106754-j3rsdqka4uddsb808be7fmr7jl0p01h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.redlinesoft.bookstore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
