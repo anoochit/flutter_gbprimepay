@@ -112,15 +112,23 @@ class GBPrimePayQRCode extends StatelessWidget {
                     log('$doc');
                     return Card(
                       child: Padding(
-                        padding: const EdgeInsets.all(32.0),
+                        padding: const EdgeInsets.only(
+                          left: 32.0,
+                          right: 32,
+                          top: 32.0,
+                          bottom: 16.0,
+                        ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("Payment recieved!"),
-                            Text("Thank You"),
-                            ElevatedButton(
-                              onPressed: () => Get.back(),
-                              child: Text("Close"),
+                            const Text("Payment recieved!"),
+                            const Text("Thank You"),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: OutlinedButton(
+                                onPressed: () => Get.back(),
+                                child: const Text("Close"),
+                              ),
                             ),
                           ],
                         ),
