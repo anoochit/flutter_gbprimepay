@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:kiosk/const.dart';
 
 class GBPrimePayQRCode extends StatelessWidget {
   const GBPrimePayQRCode({
@@ -22,6 +22,8 @@ class GBPrimePayQRCode extends StatelessWidget {
   final String token;
   final String backgroundUrl;
   final String detail;
+
+  final apiEndpoint = "https://api.gbprimepay.com/v3/qrcode";
 
   // request QRCode payment
   Future<Uint8List?> getGBPrimePayQRCode() async {
@@ -83,8 +85,10 @@ class GBPrimePayQRCode extends StatelessWidget {
                 stream: FirebaseFirestore.instance.collection("payments").doc(referenceNo).snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> paymentSnapshot) {
                   if (paymentSnapshot.hasError) {
-                    return const Center(
-                      child: Icon(Icons.error),
+                    return Center(
+                      child: Card(
+                        child: Text('${snapshot.error}'),
+                      ),
                     );
                   }
 
@@ -111,9 +115,13 @@ class GBPrimePayQRCode extends StatelessWidget {
                         padding: const EdgeInsets.all(32.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
+                          children: [
                             Text("Payment recieved!"),
                             Text("Thank You"),
+                            ElevatedButton(
+                              onPressed: () => Get.back(),
+                              child: Text("Close"),
+                            ),
                           ],
                         ),
                       ),

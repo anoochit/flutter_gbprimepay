@@ -33,11 +33,11 @@ admin.initializeApp();
 
 */
 
-exports.webhookGBPay = functions.https.onRequest((req, res) => {
+exports.webhookGBPay = functions.https.onRequest(async (req, res) => {
   functions.logger.log("message", req.body);
 
   // add data payment data to cloud firestore
-  admin
+  await admin
     .firestore()
     .collection("payments")
     .doc(req.body.referenceNo)

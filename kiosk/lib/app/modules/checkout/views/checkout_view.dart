@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kiosk/app/modules/checkout/views/gbprimepay.dart';
-import 'package:kiosk/const.dart';
 
 import '../controllers/checkout_controller.dart';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CheckoutView extends GetView<CheckoutController> {
   const CheckoutView({Key? key}) : super(key: key);
@@ -44,8 +45,8 @@ class CheckoutView extends GetView<CheckoutController> {
                     referenceNo: referenceNo,
                     detail: controller.product.value.title,
                     amount: amount,
-                    backgroundUrl: backgroundUrl,
-                    token: gbToken,
+                    backgroundUrl: dotenv.env['BACKGROUND_URL'] ?? "",
+                    token: dotenv.env['GB_TOKEN'] ?? "",
                   ),
                   useSafeArea: true,
                 );
