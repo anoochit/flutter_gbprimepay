@@ -55,11 +55,20 @@ class GBPrimePayQRCode extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
+        // get QRCode
         child: FutureBuilder(
           future: getGBPrimePayQRCode(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
-              return const Text("Cannot load QRCode");
+              return const Center(
+                child: Card(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.all(32.0),
+                    child: Text("Cannot load QRCode"),
+                  ),
+                ),
+              );
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -75,7 +84,14 @@ class GBPrimePayQRCode extends StatelessWidget {
             }
 
             if (snapshot.data == null) {
-              return const Text("Cannot load QRCode");
+              return const Center(
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(32.0),
+                    child: Text("Cannot load QRCode"),
+                  ),
+                ),
+              );
             }
 
             // use stream to check recieve payment
