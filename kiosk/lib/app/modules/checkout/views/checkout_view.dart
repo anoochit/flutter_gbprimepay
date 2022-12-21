@@ -40,6 +40,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 final referenceNo = DateTime.now().millisecondsSinceEpoch.toString();
                 final amount = controller.product.value.price;
 
+                // show dialog
                 Get.dialog(
                   GBPrimePayQRCode(
                     referenceNo: referenceNo,
@@ -47,6 +48,14 @@ class CheckoutView extends GetView<CheckoutController> {
                     amount: amount,
                     backgroundUrl: dotenv.env['BACKGROUND_URL'] ?? "",
                     token: dotenv.env['GB_TOKEN'] ?? "",
+                    completeMessage1: "Payment recieved!",
+                    completeMessage2: "Thank You",
+                    completeButtonTitle: "Close",
+                    completeButtonOnTap: () => Get.back(),
+                    failMessage1: "Payment not complete!",
+                    failMessage2: "Try other payment method",
+                    failButtonTitle: "Close",
+                    failButtonOnTap: () => Get.back(),
                   ),
                   useSafeArea: true,
                 );

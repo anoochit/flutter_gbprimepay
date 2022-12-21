@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -15,6 +14,14 @@ class GBPrimePayQRCode extends StatelessWidget {
     required this.amount,
     required this.token,
     required this.detail,
+    required this.completeMessage1,
+    required this.completeMessage2,
+    required this.completeButtonTitle,
+    required this.completeButtonOnTap,
+    required this.failMessage1,
+    required this.failMessage2,
+    required this.failButtonTitle,
+    required this.failButtonOnTap,
   });
 
   final String referenceNo;
@@ -22,6 +29,16 @@ class GBPrimePayQRCode extends StatelessWidget {
   final String token;
   final String backgroundUrl;
   final String detail;
+
+  final String completeMessage1;
+  final String completeMessage2;
+  final String completeButtonTitle;
+  final VoidCallback completeButtonOnTap;
+
+  final String failMessage1;
+  final String failMessage2;
+  final String failButtonTitle;
+  final VoidCallback failButtonOnTap;
 
   final apiEndpoint = "https://api.gbprimepay.com/v3/qrcode";
 
@@ -59,6 +76,7 @@ class GBPrimePayQRCode extends StatelessWidget {
         child: FutureBuilder(
           future: getGBPrimePayQRCode(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+            // has error
             if (snapshot.hasError) {
               return const Center(
                 child: Card(
@@ -71,6 +89,7 @@ class GBPrimePayQRCode extends StatelessWidget {
               );
             }
 
+            // loading
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: Card(
@@ -83,6 +102,7 @@ class GBPrimePayQRCode extends StatelessWidget {
               );
             }
 
+            // return null
             if (snapshot.data == null) {
               return const Center(
                 child: Card(
@@ -125,34 +145,64 @@ class GBPrimePayQRCode extends StatelessWidget {
                     // has payment data show message
                     log("has payment data");
                     final doc = paymentSnapshot.data;
-                    log('$doc');
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 32.0,
-                          right: 32,
-                          top: 32.0,
-                          bottom: 16.0,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text("Payment recieved!"),
-                            const Text("Thank You"),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16.0),
-                              child: OutlinedButton(
-                                onPressed: () => Get.back(),
-                                child: const Text("Close"),
+                    log('response doc = ${doc}');
+                    log('result code = ${doc?["resultCode"]}');
+                    if ('${doc?["resultCode"]}' == "00") {
+                      // show complete message
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 32.0,
+                            right: 32,
+                            top: 32.0,
+                            bottom: 16.0,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('$completeMessage1'),
+                              Text('$completeMessage2'),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: OutlinedButton(
+                                  onPressed: () => completeButtonOnTap(),
+                                  child: Text('$completeButtonTitle'),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      // show fail message
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 32.0,
+                            right: 32,
+                            top: 32.0,
+                            bottom: 16.0,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('$failMessage1'),
+                              Text('$failMessage2'),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: OutlinedButton(
+                                  onPressed: () => failButtonOnTap(),
+                                  child: Text('$failButtonTitle'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
                   } else {
                     // no payment data show QR Code
-                    log("no payment data");
+                    log("no payment data show QRCode");
                     return Image.memory(snapshot.data);
                   }
                 },
